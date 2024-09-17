@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="https://ridecell.com/wp-content/themes/ridecell2017/favicon.ico" />
+    <title>Ridecell Intelligence</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            background-color: #fafafa;
+            color: #333;
+        }
+        .container {
+            margin: 0 auto;
+            padding: 20px;
+            max-width: 1400px;
+        }
+        /* Header */
+        .header {
+            background-color: #1a73e8;
+            color: white;
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+        .header p {
+            margin: 5px 0 0;
+            font-size: 18px;
+        }
+        /* Navigation */
+        .nav {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: sticky;
+            top: 80px;
+            z-index: 999;
+        }
+        .nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav a {
+            color: #555;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        .nav a:hover, .nav a.active {
+            background-color: #e8f0fe;
+            color: #1a73e8;
+        }
+        /* Main Sections */
+        .section {
+            background-color: white;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .section h2 {
+            border-bottom: 2px solid #f0f2f5;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .content {
+            margin-top: 20px;
+        }
+        /* Alerts */
+        .alert {
+            padding: 15px;
+            color: white;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+        }
+        .alert-danger {
+            background-color: #d93025;
+        }
+        .alert-warning {
+            background-color: #f9ab00;
+            color: #333;
+        }
+        .alert-icon {
+            margin-right: 10px;
+            font-size: 24px;
+        }
+        /* Tables */
+        .table-responsive {
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        table th, table td {
+            border: 1px solid #f0f2f5;
+            padding: 12px;
+            text-align: center;
+        }
+        table th {
+            background-color: #f0f2f5;
+        }
+        /* Charts */
+        .chart {
+            margin-bottom: 30px;
+        }
+        /* Ideas */
+        .ideas ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .ideas ul li {
+            background-color: #e8f0fe;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+        }
+        .ideas ul li .icon {
+            background-color: #1a73e8;
+            color: white;
+            border-radius: 50%;
+            padding: 10px;
+            margin-right: 15px;
+            font-size: 18px;
+        }
+        /* Buttons */
+        .action-button {
+            background-color: #6cc04a;
+            color: white;
+            padding: 14px 28px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 30px;
+            font-size: 16px;
+        }
+        .action-button:hover {
+            background-color: #1669bb;
+        }
+        /* Footer */
+        .footer {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #ffffff;
+            text-align: center;
+            color: #999;
+            border-top: 1px solid #f0f2f5;
+        }
+        /* Bottleneck Indicators */
+        .bottleneck {
+            background-color: #ffe0b2;
+            padding: 10px;
+            border-left: 5px solid #fb8c00;
+            margin-bottom: 20px;
+            border-radius: 3px;
+        }
+
+
+                /* Key Metrics Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        .card-icon {
+            font-size: 30px;
+            color: #1a73e8;
+            margin-bottom: 10px;
+        }
+        .card h3 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #555;
+            margin: 0 0 10px;
+        }
+        .card p {
+            font-size: 36px;
+            font-weight: bold;
+            color: #333;
+            margin: 0;
+        }
+        .card .subtext {
+            font-size: 14px;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        .navbar-container {
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+            z-index: 4;
+            position: relative;
+        }
+        .master-container {
+            display: flex;
+            width: 100%;
+            height: calc(100% - 50px); /* Adjust height */
+        }
+        #tabs {
+            width: 82px;
+            flex-shrink: 0; /* Fix width */
+            box-shadow: 2px 0px 2px rgba(0, 0, 0, 0.1);
+            z-index: 3;
+            background: white;
+        }
+        #content-container {
+            flex-grow: 1; /* Take the remaining width */
+            display: inline-block;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .nav .container {
+                flex-direction: column;
+            }
+            .filters {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .filters label, .filters select, .filters input[type="date"] {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+    <!-- Include Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Include Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+</head>
+<body>
+
+    <div class="navbar-container">
+        <img id="navbar" src="navbar.png" style="width:100%; display: block;">
+    </div>
+    <div class="master-container">
+        <div id="tabs">
+            <img src="tabs.png" style="width: 82px;">
+        </div>
+        <div id="content-container">
+            <a id="link-dashboard" href="https://kartik.github.io/"></a>
+            <img src="filters_dashboard_selected.png" style="width:100%; display: block; border-bottom: 2px solid #eaeaea;">
+            <!-- Main Container -->
+            <div class="container">
+
+                <!-- Key Metrics Cards Section -->
+                <div class="card-grid">
+                    <div class="card">
+                        <i class="fas fa-car card-icon"></i>
+                        <h3>Total Surplus Vehicles</h3>
+                        <p>8,000</p>
+                        <div class="subtext">As of Week 4</div>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-dollar-sign card-icon"></i>
+                        <h3>Projected Extra Costs</h3>
+                        <p>$500,000</p>
+                        <div class="subtext">This Month</div>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-warehouse card-icon"></i>
+                        <h3>Storage Capacity Used</h3>
+                        <p>95%</p>
+                        <div class="subtext">Approaching Limit</div>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-route card-icon"></i>
+                        <h3>Average Allocation Rate</h3>
+                        <p>1,000</p>
+                        <div class="subtext">Vehicles/Week</div>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-handshake card-icon"></i>
+                        <h3>Vendor Service Rates</h3>
+                        <p>$50</p>
+                        <div class="subtext">Per Vehicle/Week</div>
+                    </div>
+                </div>
+
+                <!-- Problem Detection Section -->
+                <div class="section">
+                    <h2>Identified Issue</h2>
+                    <div class="content">
+                        <div class="alert alert-danger">
+                            <span class="alert-icon"><i class="fas fa-exclamation-triangle"></i></span>
+                            <div>
+                                <strong>Critical Alert:</strong> Excess inventory accumulation detected! Weekly deliveries exceed allocations by <strong>2,000 vehicles</strong>.
+                            </div>
+                        </div>
+                        <div class="chart">
+                            <!-- Placeholder for Interactive Inventory Levels Chart -->
+                            <canvas id="inventoryChart" width="100%" height="40"></canvas>
+                        </div>
+                        <div class="table-responsive">
+                            <h3>Weekly Inventory Data</h3>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Week</th>
+                                        <th>Vehicles Delivered</th>
+                                        <th>Vehicles Allocated</th>
+                                        <th>Surplus Vehicles</th>
+                                        <th>Cumulative Surplus</th>
+                                        <th>Major Delays (%)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="inventoryTableBody">
+                                    <!-- Data to be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Problem Projection Section -->
+                <div class="section">
+                    <h2>Problem Projection</h2>
+                    <div class="alert alert-warning">
+                            <span class="alert-icon"><i class="fas fa-exclamation-circle"></i></span>
+                            <div>
+                                <strong>Warning:</strong> Storage capacity will be exceeded in <strong>1 week</strong>. Major delays are rising due to processing bottlenecks.
+                            </div>
+                        </div>
+                    <div class="content">
+                        <div class="chart">
+                            <!-- Placeholder for Predictive Analytics Chart -->
+                            <canvas id="projectionChart" width="100%" height="40"></canvas>
+                        </div>
+                        <p>Continuing at the current rate, the cumulative surplus will reach <strong>12,000 vehicles</strong> by Week 6, resulting in an additional estimated cost of <strong>$750,000</strong> in storage and transport fees.</p>
+                        <p>Additionally, major delays above acceptable thresholds are projected to affect <strong>25%</strong> of deliveries, potentially impacting <strong>6,000 customers</strong>.</p>
+                    </div>
+                </div>
+
+                <!-- Solution Ideas Section -->
+                <div class="section">
+                    <h2>Recommended Actions</h2>
+                    <div class="content">
+                        <div class="ideas">
+                            <!-- Bottleneck Section -->
+<!--                             <div class="bottleneck">
+                                <strong>Bottleneck Identified:</strong> Limited allocation capacity due to staffing shortages in the allocation department, causing delays in processing orders.
+                            </div> -->
+                            <ul>
+                                <li>
+                                    <span class="icon"><i class="fas fa-user-clock"></i></span>
+                                    <div>
+                                        <strong>Address Staffing Bottlenecks:</strong> Temporarily increase staffing in the allocation department to expedite order processing and reduce delays.
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="icon"><i class="fas fa-chart-line"></i></span>
+                                    <div>
+                                        <strong>Dynamic Allocation Adjustment:</strong> Utilize AI-driven forecasts to adjust allocations in real-time, aligning deliveries with actual demand and processing capacity.
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="icon"><i class="fas fa-gift"></i></span>
+                                    <div>
+                                        <strong>Customer Incentives Program:</strong> Implement a tiered incentive program offering upgrades or discounts to encourage early vehicle acceptance, targeting the 6,000 customers at risk of delay.
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="icon"><i class="fas fa-handshake"></i></span>
+                                    <div>
+                                        <strong>Negotiate Vendor Rates:</strong> Engage with vendors to negotiate better service rates, leveraging the scale of surplus vehicles to reduce per-unit storage costs.
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="icon"><i class="fas fa-route"></i></span>
+                                    <div>
+                                        <strong>Expand Distribution Channels:</strong> Partner with ride-sharing companies or rental agencies to temporarily utilize excess inventory, alleviating storage constraints.
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="icon"><i class="fas fa-exclamation-triangle"></i></span>
+                                    <div>
+                                        <strong>Set Priority Protocols:</strong> Implement protocols to prioritize allocations for vehicles approaching storage capacity limits to prevent exceeding thresholds.
+                                    </div>
+                                </li>
+                            </ul>
+                            <a href="#" class="action-button">Implement Action Plan</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Scripts -->
+    <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Sample Data (In a real application, data would come from an API)
+        const inventoryData = [
+            { week: 'Week 1', delivered: 3000, allocated: 1000, delays: 10 },
+            { week: 'Week 2', delivered: 3000, allocated: 1000, delays: 12 },
+            { week: 'Week 3', delivered: 3000, allocated: 1000, delays: 15 },
+            { week: 'Week 4', delivered: 3000, allocated: 1000, delays: 15 },
+            { week: 'Week 5', delivered: 3000, allocated: 1500, delays: 18 },
+            { week: 'Week 6', delivered: 3000, allocated: 2000, delays: 25 },
+        ];
+        const vendorRatePerVehicle = 50; // $50 per vehicle per week
+
+        // Populate Inventory Table
+        const tableBody = document.getElementById('inventoryTableBody');
+        let cumulativeSurplus = 0;
+        inventoryData.forEach((data) => {
+            cumulativeSurplus += data.delivered - data.allocated;
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${data.week}</td>
+                <td>${data.delivered}</td>
+                <td>${data.allocated}</td>
+                <td style="color: ${data.delivered - data.allocated > 0 ? 'red' : 'green'};">
+                    ${data.delivered - data.allocated > 0 ? '+' : ''}${data.delivered - data.allocated}
+                </td>
+                <td>${cumulativeSurplus}</td>
+                <td>${data.delays}%</td>
+            `;
+            tableBody.appendChild(row);
+        });
+
+        // Inventory Levels Chart
+        const inventoryCtx = document.getElementById('inventoryChart').getContext('2d');
+        const inventoryChart = new Chart(inventoryCtx, {
+            type: 'line',
+            data: {
+                labels: inventoryData.map(data => data.week),
+                datasets: [{
+                    label: 'Cumulative Surplus Vehicles',
+                    data: inventoryData.map((data, index) => {
+                        return inventoryData.slice(0, index + 1).reduce((acc, curr) => acc + (curr.delivered - curr.allocated), 0);
+                    }),
+                    backgroundColor: 'rgba(66, 133, 244, 0.2)',
+                    borderColor: 'rgba(66, 133, 244, 1)',
+                    borderWidth: 2,
+                    fill: true,
+                    tension: 0.1,
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `Surplus: ${context.parsed.y} vehicles`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Week'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Number of Vehicles'
+                        },
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Projection Chart (Predictive Analytics)
+        const projectionCtx = document.getElementById('projectionChart').getContext('2d');
+        const projectionChart = new Chart(projectionCtx, {
+            type: 'bar',
+            data: {
+                labels: inventoryData.map(data => data.week),
+                datasets: [
+                    {
+                        label: 'Projected Storage Costs ($)',
+                        data: inventoryData.map((data, index) => {
+                            const surplus = inventoryData.slice(0, index + 1).reduce((acc, curr) => acc + (curr.delivered - curr.allocated), 0);
+                            return surplus * vendorRatePerVehicle;
+                        }),
+                        backgroundColor: 'rgba(251, 188, 5, 0.7)',
+                        borderColor: 'rgba(251, 188, 5, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Major Delays (%)',
+                        data: inventoryData.map(data => data.delays),
+                        type: 'line',
+                        yAxisID: 'y1',
+                        backgroundColor: 'rgba(234, 67, 53, 0.2)',
+                        borderColor: 'rgba(234, 67, 53, 1)',
+                        borderWidth: 2,
+                        fill: false,
+                        tension: 0.1,
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Week'
+                        }
+                    },
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        title: {
+                            display: true,
+                            text: 'Cost in USD'
+                        },
+                        beginAtZero: true
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        title: {
+                            display: true,
+                            text: 'Delays (%)'
+                        },
+                        grid: {
+                            drawOnChartArea: false
+                        },
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Apply Filters Function
+        function applyFilters() {
+            // In a real application, this function would fetch and display data based on selected filters.
+            alert('Filters applied. Data refreshed based on selected date range and region.');
+        }
+    </script>
+
+</body>
+</html>
