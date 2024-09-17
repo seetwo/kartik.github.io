@@ -84,10 +84,26 @@
 
         #link-dashboard {
             position: absolute;
-            height: 60px;
-            width: 135px;
-            right: 180px;
-            top: 100px;
+            height: 90px;
+            width: 60px;
+            right: 184px;
+            top: 80px;
+        }
+
+        #link-graph {
+            position: absolute;
+            height: 90px;
+            width: 60px;
+            right: 97px;
+            top: 80px;
+        }
+
+        #link-feed {
+            position: absolute;
+            height: 90px;
+            width: 60px;
+            right: 10px;
+            top: 80px;
         }
     </style>
 </head>
@@ -101,6 +117,8 @@
         </div>
         <div id="content-container">
             <a id="link-dashboard" href="index.html"></a>
+            <a id="link-graph" href="graph.html"></a>
+            <a id="link-feed" href="feed.html"></a>
             <img src="filters.png" style="width:100%; display: block; border-bottom: 2px solid #eaeaea;">
             <div id="chart"></div>
         </div>
@@ -110,7 +128,7 @@
             <span class="legend-color" style="background:#1f77b4;"></span> Entities
         </div>
         <div class="legend-item">
-            <span class="legend-color" style="background:#9467bd;"></span> Activity
+            <span class="legend-color" style="background:#9467bd;"></span> Activities
         </div>
         <div class="legend-item">
             <span class="legend-color" style="background:#ff7f0e;"></span> Impact - Trending Up
